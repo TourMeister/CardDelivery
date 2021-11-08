@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.files.DownloadActions.click;
 
 public class CardDeliveryTest {
     private WebDriver driver;
