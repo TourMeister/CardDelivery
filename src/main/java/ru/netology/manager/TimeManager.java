@@ -5,9 +5,9 @@ import org.joda.time.DateTime;
 import java.util.Date;
 
 public class TimeManager {
+    Date date = new Date();
 
     public String TimeConstructor() {
-        Date date = new Date();
         DateTime dtOrg = new DateTime(date);
         DateTime dtPlus = dtOrg.plusDays(6);
 
