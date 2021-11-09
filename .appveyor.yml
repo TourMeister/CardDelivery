@@ -6,6 +6,7 @@ branches:
   only:
     - master  # ветка git
 
+
 build: off  # будем использовать свой скрипт сборки
 
 install:
@@ -14,11 +15,7 @@ install:
   - java -jar ./artifacts/app-card-delivery.jar &
 
 build_script:
-  - gradlew test -Dselenide.headless=true
-    # HEADLESS режим браузера
-  # На серверах сборки чаще всего нет графического интерфейса,
-  # поэтому запуская браузер в режиме headless мы отключаем графический интерфейс
-  # (при этот все процессы браузера продолжают работать так же).
+  - ./gradlew test --info  # запускаем тест, флаг --info позволяет выводить больше информации
 
 
 notifications:
