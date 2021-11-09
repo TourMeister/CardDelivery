@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
@@ -30,8 +29,6 @@ public class CardDeliveryTest {
 
     @BeforeEach
     void setupTest() {
-        ChromeOptions options = new ChromeOptions();
-//        driver = new ChromeDriver(options);
         open("http://localhost:9999");
     }
 
