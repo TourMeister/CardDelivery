@@ -15,7 +15,7 @@ install:
   - java -jar ./artifacts/app-card-delivery.jar &
 
 build_script:
-  - ./gradlew test --info  # запускаем тест, флаг --info позволяет выводить больше информации
+  - ./gradlew test --info --debug  # запускаем тест, флаг --info позволяет выводить больше информации
 
 
 notifications:
