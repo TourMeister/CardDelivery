@@ -11,18 +11,16 @@ import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.files.DownloadActions.click;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
     private WebDriver driver;
     TimeManager manager = new TimeManager();
     String dateToInput = manager.TimeConstructor();
-    String date[] = manager.DayAfterWeek();
+    String[] date = manager.DayAfterWeek();
 
     @Test
     void checker() {
@@ -63,21 +61,4 @@ public class CardDeliveryTest {
         $(withText("Успешно!")).
                 shouldBe(visible, Duration.ofSeconds(15));
     }
-//
-//    @Test
-//    void shouldSelectFromList() {
-//        $("[placeholder='Город']").setValue("Са");
-//        $(byText("Санкт-Петербург")).click();
-//        $("icon-button__content").click(); // открытие календаря
-//
-//
-//    }
-//
-//    void calendarSelector() {
-//        String calendarName = date[1] + date[2];
-//        String currentCalendarName = $("class=['calendar__name']").getText();
-//        if ()
-//    }
-
-
 }
