@@ -1,12 +1,8 @@
 package ru.netology;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
@@ -17,36 +13,15 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
-    private WebDriver driver;
     TimeManager manager = new TimeManager();
     String dateToInput = manager.TimeConstructor();
     String[] date = manager.DayAfterWeek();
-
-    @Test
-    void checker() {
-        $("[placeholder='Дата встречи']").click(); // открытие календаря
-        System.out.println($("class=['calendar__name']").getText());
-    }
-
-    @BeforeAll
-//    Автоматическая установка ChromeDriver для операционной системы
-    static void setUpClass() {
-        WebDriverManager.chromedriver().setup();
-    }
 
     @BeforeEach
     void setupTest() {
         open("http://localhost:9999");
     }
 
-    @AfterEach
-    void teardown() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
-    }
-//
     @Test
     void shouldOrderCardDeliveryByText() {
         $("[placeholder='Город']").setValue("Мурманск");
