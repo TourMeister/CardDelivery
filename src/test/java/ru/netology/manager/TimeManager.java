@@ -2,10 +2,15 @@ package ru.netology.manager;
 
 import org.joda.time.DateTime;
 
-import java.util.Date;
+import java.util.Objects;
+
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class TimeManager {
-    Date date = new Date();
+    String[] date;
 
     public String timeConstructor() {
         DateTime dtOrg = new DateTime(date);
@@ -38,5 +43,22 @@ public class TimeManager {
         String year = String.valueOf(dtOrg.getYear());
 
         return new String[]{day, monthName, year};
+    }
+
+
+    public void calendarSelector(String[] date) {
+        String[] currentDate = currentDate();
+        if (!Objects.equals(date[1], currentDate[1])) {
+            $("[data-step='1']").click();
+        }
+        String theRightDay = date[0];
+        $$("[role=gridcell]").find(exactText(theRightDay)).click();
+    }
+
+    public void endOfInsert() {
+        $("[name='name']").setValue("Пореченков Михаил");
+        $("[name='phone']").setValue("+79009009988");
+        $("[class='checkbox__box']").click();
+        $(withText("Забронировать")).click();
     }
 }

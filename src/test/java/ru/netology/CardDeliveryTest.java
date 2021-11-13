@@ -27,10 +27,8 @@ public class CardDeliveryTest {
         $("[placeholder='Дата встречи']").sendKeys(Keys.CONTROL+"a");
         $("[placeholder='Дата встречи']").sendKeys(Keys.DELETE);
         $("[placeholder='Дата встречи']").setValue(String.valueOf(dateToInput));
-        $("[name='name']").setValue("Пореченков Михаил");
-        $("[name='phone']").setValue("+79009009988");
-        $("[class='checkbox__box']").click();
-        $(withText("Забронировать")).click();
+
+        manager.endOfInsert();
 
         $(withText("Успешно!")).
                 shouldBe(visible, Duration.ofSeconds(15));
