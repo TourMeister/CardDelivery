@@ -7,7 +7,7 @@ import java.util.Date;
 public class TimeManager {
     Date date = new Date();
 
-    public String TimeConstructor() {
+    public String timeConstructor() {
         DateTime dtOrg = new DateTime(date);
         DateTime dtPlus = dtOrg.plusDays(5);
 
@@ -18,16 +18,25 @@ public class TimeManager {
         return day + '.' + month + '.' + year;
     }
 
-    public String[] DayAfterWeek() {
+    public String[] plusDays(int plusDays) {
         DateTime dtOrg = new DateTime(date);
-        DateTime dtPlus = dtOrg.plusDays(7);
+        DateTime dtPlus = dtOrg.plusDays(plusDays);
 
         String day = String.valueOf(dtPlus.getDayOfMonth());
         String monthName = dtPlus.monthOfYear().getAsText();
         String year = String.valueOf(dtPlus.getYear());
 
-        String date[] = {day, monthName, year};
+        return new String[]{day, monthName, year};
+    }
 
-        return date;
+
+    public String[] currentDate() {
+        DateTime dtOrg = new DateTime(date);
+
+        String day = String.valueOf(dtOrg.getDayOfMonth());
+        String monthName = dtOrg.monthOfYear().getAsText();
+        String year = String.valueOf(dtOrg.getYear());
+
+        return new String[]{day, monthName, year};
     }
 }

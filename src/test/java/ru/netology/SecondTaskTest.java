@@ -2,15 +2,22 @@ package ru.netology;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 import ru.netology.manager.TimeManager;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import java.time.Duration;
+import java.util.Objects;
+
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SecondTaskTest {
         TimeManager manager = new TimeManager();
-        String dateToInput = manager.TimeConstructor();
-        String[] currentDate = manager.CurrentDate();
+        String dateToInput = manager.timeConstructor();
+        String[] currentDate = manager.currentDate();
         String[] date;
 
         @BeforeEach
@@ -61,4 +68,4 @@ public class SecondTaskTest {
         }
 
     }
-}
+

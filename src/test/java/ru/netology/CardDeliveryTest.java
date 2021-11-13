@@ -14,8 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
     TimeManager manager = new TimeManager();
-    String dateToInput = manager.TimeConstructor();
-    String[] date = manager.DayAfterWeek();
+    String dateToInput = manager.timeConstructor();
 
     @BeforeEach
     void setupTest() {
