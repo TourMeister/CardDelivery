@@ -6,6 +6,8 @@ import org.openqa.selenium.Keys;
 import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
@@ -21,6 +23,7 @@ public class CardDeliveryTest {
         open("http://localhost:9999");
     }
 
+
     @Test
     void shouldOrderCardDeliveryByText() {
         $("[placeholder='Город']").setValue("Мурманск");
@@ -30,7 +33,7 @@ public class CardDeliveryTest {
 
         manager.endOfInsert();
 
-        $(withText("Успешно!")).
+        $(withText(dateToInput)).
                 shouldBe(visible, Duration.ofSeconds(15));
     }
 }
