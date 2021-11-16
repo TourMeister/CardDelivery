@@ -4,9 +4,12 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class TimeManager {
     String[] date;
@@ -40,8 +43,8 @@ public class TimeManager {
 
 
     public void calendarSelector(String[] date) {
-//        String[] currentDate = currentDate();
-        if (!Objects.equals(date[1], currentDate[1])) {
+        String currentMonth = String.valueOf(LocalDate.now().getMonthOfYear());
+        if (!Objects.equals(date[1], currentMonth)) {
             $("[data-step='1']").click();
         }
         String theRightDay = date[0];
