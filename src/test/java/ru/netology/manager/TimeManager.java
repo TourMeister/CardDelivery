@@ -1,13 +1,12 @@
 package ru.netology.manager;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class TimeManager {
     String[] date;
@@ -24,8 +23,7 @@ public class TimeManager {
     }
 
     public String[] plusDays(int plusDays) {
-        DateTime dtOrg = new DateTime(date);
-        DateTime dtPlus = dtOrg.plusDays(plusDays);
+        LocalDate dtPlus = LocalDate.now().plusDays(plusDays);
 
         String day = String.valueOf(dtPlus.getDayOfMonth());
         String monthName = dtPlus.monthOfYear().getAsText();
@@ -34,20 +32,15 @@ public class TimeManager {
         return new String[]{day, monthName, year};
     }
 
-
-    public String[] currentDate() {
-        DateTime dtOrg = new DateTime(date);
-
-        String day = String.valueOf(dtOrg.getDayOfMonth());
-        String monthName = dtOrg.monthOfYear().getAsText();
-        String year = String.valueOf(dtOrg.getYear());
-
-        return new String[]{day, monthName, year};
+    public String currentDate() {
+        String date = java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        System.out.println(date);
+        return date;
     }
 
 
     public void calendarSelector(String[] date) {
-        String[] currentDate = currentDate();
+//        String[] currentDate = currentDate();
         if (!Objects.equals(date[1], currentDate[1])) {
             $("[data-step='1']").click();
         }
