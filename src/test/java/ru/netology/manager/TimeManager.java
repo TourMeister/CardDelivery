@@ -25,29 +25,20 @@ public class TimeManager {
         return day + '.' + month + '.' + year;
     }
 
-    public String[] plusDays(int plusDays) {
-        LocalDate dtPlus = LocalDate.now().plusDays(plusDays);
-
-        String day = String.valueOf(dtPlus.getDayOfMonth());
-        String monthName = dtPlus.monthOfYear().getAsText();
-        String year = String.valueOf(dtPlus.getYear());
-
-        return new String[]{day, monthName, year};
-    }
-
     public String currentDate() {
         String date = java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         System.out.println(date);
         return date;
     }
 
+    public void calendarSelector(LocalDate date) {
+        int currentMonth = LocalDate.now().getMonthOfYear();
+        int month = date.getMonthOfYear();
 
-    public void calendarSelector(String[] date) {
-        String currentMonth = String.valueOf(LocalDate.now().getMonthOfYear());
-        if (!Objects.equals(date[1], currentMonth)) {
+        if (!Objects.equals(month, currentMonth)) {
             $("[data-step='1']").click();
         }
-        String theRightDay = date[0];
+        String theRightDay = String.valueOf(date.getDayOfMonth());
         $$("[role=gridcell]").find(exactText(theRightDay)).click();
     }
 
@@ -56,5 +47,14 @@ public class TimeManager {
         $("[name='phone']").setValue("+79009009988");
         $("[class='checkbox__box']").click();
         $(withText("Забронировать")).click();
+    }
+
+    public String constructorNotificationContent(LocalDate date) {
+
+        String day = String.valueOf(date.getDayOfMonth()) + '.';
+        String month = String.valueOf(date.getMonthOfYear()) + '.';
+        String year = String.valueOf(date.getYear());
+
+        return day + month + year;
     }
 }

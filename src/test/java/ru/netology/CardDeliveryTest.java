@@ -18,6 +18,9 @@ public class CardDeliveryTest {
     TimeManager manager = new TimeManager();
     String dateToInput = manager.timeConstructor();
 
+    /*TODO переделать логику plusDays и убрать ее из timeConstructor()*/
+
+
     @BeforeEach
     void setupTest() {
         open("http://localhost:9999");

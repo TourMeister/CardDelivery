@@ -1,5 +1,6 @@
 package ru.netology;
 
+import org.joda.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -31,7 +32,7 @@ public class SecondTaskTest {
 
         manager.endOfInsert();
 
-        $(withText("Успешно!")).
+        $(withText(dateToInput)).
                 shouldBe(visible, Duration.ofSeconds(15));
     }
 
@@ -40,12 +41,16 @@ public class SecondTaskTest {
         $("[placeholder='Город']").setValue("Са");
         $(byText("Санкт-Петербург")).click();
         $("[placeholder='Дата встречи']").click(); // открытие календаря
-        String[] date = manager.plusDays(7);
+        LocalDate date = LocalDate.now().plusDays(7);
+//        LocalDate dateForCheck = LocalDate.now().plusDays(7);
 
         manager.calendarSelector(date);
         manager.endOfInsert();
+        //TODO сделать проверку через timeConstructor()
+        //TODO убрать  constructorNotificationContent(LocalDate date)
+        String notificationContent = manager.constructorNotificationContent(date);
 
-        $(withText("Успешно!")).
+        $(withText(notificationContent)).
                 shouldBe(visible, Duration.ofSeconds(15));
     }
 }
