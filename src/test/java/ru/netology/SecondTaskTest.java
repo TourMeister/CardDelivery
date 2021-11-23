@@ -46,13 +46,10 @@ public class SecondTaskTest {
         $(byText("Санкт-Петербург")).click();
         $("[placeholder='Дата встречи']").click(); // открытие календаря
         LocalDate date = LocalDate.now().plusDays(7);
-//        LocalDate dateForCheck = LocalDate.now().plusDays(7);
 
         manager.calendarSelector(date);
         manager.endOfInsert();
-        //TODO сделать проверку через timeConstructor()
-        //TODO убрать  constructorNotificationContent(LocalDate date)
-        String notificationContent = manager.constructorNotificationContent(date);
+        String notificationContent = formatter.format(date);
 
         $(withText(notificationContent)).
                 shouldBe(visible, Duration.ofSeconds(15));
