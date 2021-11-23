@@ -1,12 +1,14 @@
 package ru.netology;
 
-import org.joda.time.LocalDate;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -16,7 +18,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class SecondTaskTest {
     TimeManager manager = new TimeManager();
-    String dateToInput = manager.timeConstructor();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @BeforeEach
     void setupTest() {
@@ -25,10 +27,13 @@ public class SecondTaskTest {
 
     @Test
     void shouldOrderCardDeliveryByText() {
+        LocalDate date = LocalDate.now().plusDays(7);
+        String dateToInput = formatter.format(date);
+
         $("[placeholder='Город']").setValue("Мурманск");
         $("[placeholder='Дата встречи']").sendKeys(Keys.CONTROL + "a");
         $("[placeholder='Дата встречи']").sendKeys(Keys.DELETE);
-        $("[placeholder='Дата встречи']").setValue(String.valueOf(dateToInput));
+        $("[placeholder='Дата встречи']").setValue(dateToInput);
 
         manager.endOfInsert();
 
@@ -54,4 +59,3 @@ public class SecondTaskTest {
                 shouldBe(visible, Duration.ofSeconds(15));
     }
 }
-
