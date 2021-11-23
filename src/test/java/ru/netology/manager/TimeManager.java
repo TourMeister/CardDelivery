@@ -34,12 +34,4 @@ DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         $(withText("Забронировать")).click();
     }
 
-//    public String constructorNotificationContent(LocalDate date) {
-//
-//        String day = String.valueOf(date.getDayOfMonth()) + '.';
-//        String month = String.valueOf(date.getMonthValue()) + '.';
-//        String year = String.valueOf(date.getYear());
-//
-//        return day + month + year;
-//    }
 }
