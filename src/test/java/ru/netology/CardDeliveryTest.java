@@ -3,7 +3,6 @@ package ru.netology;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import ru.netology.manager.TimeManager;
 
 import java.time.Duration;
 import java.time.LocalDate;
