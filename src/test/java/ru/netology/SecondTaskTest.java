@@ -8,12 +8,13 @@ import ru.netology.manager.TimeManager;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SecondTaskTest {
     TimeManager manager = new TimeManager();
@@ -34,7 +35,10 @@ public class SecondTaskTest {
         $("[placeholder='Дата встречи']").sendKeys(Keys.DELETE);
         $("[placeholder='Дата встречи']").setValue(dateToInput);
 
-        manager.endOfInsert();
+        $("[name='name']").setValue("Пореченков Михаил");
+        $("[name='phone']").setValue("+79009009988");
+        $("[class='checkbox__box']").click();
+        $(withText("Забронировать")).click();
 
         $(withText(dateToInput)).
                 shouldBe(visible, Duration.ofSeconds(15));
@@ -47,11 +51,22 @@ public class SecondTaskTest {
         $("[placeholder='Дата встречи']").click(); // открытие календаря
         LocalDate date = LocalDate.now().plusDays(7);
 
-        manager.calendarSelector(date);
-        manager.endOfInsert();
+        int currentMonth = LocalDate.now().getMonthValue();
+        int month = date.getMonthValue();
+
+        if (!Objects.equals(month, currentMonth)) {
+            $("[data-step='1']").click();
+        }
+        String theRightDay = String.valueOf(date.getDayOfMonth());
+        $$("[role=gridcell]").find(exactText(theRightDay)).click();
+
+        $("[name='name']").setValue("Пореченков Михаил");
+        $("[name='phone']").setValue("+79009009988");
+        $("[class='checkbox__box']").click();
+        $(withText("Забронировать")).click();
         String notificationContent = formatter.format(date);
 
-        $(withText(notificationContent)).
+        $("[data-test-id='notification']").
                 shouldBe(visible, Duration.ofSeconds(15));
     }
 }

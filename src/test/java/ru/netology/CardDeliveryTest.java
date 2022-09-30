@@ -15,7 +15,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryTest {
-    TimeManager manager = new TimeManager();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @BeforeEach
@@ -33,7 +32,10 @@ public class CardDeliveryTest {
         $("[placeholder='Дата встречи']").sendKeys(Keys.DELETE);
         $("[placeholder='Дата встречи']").setValue(dateToInput);
 
-        manager.endOfInsert();
+        $("[name='name']").setValue("Пореченков Михаил");
+        $("[name='phone']").setValue("+79009009988");
+        $("[class='checkbox__box']").click();
+        $(withText("Забронировать")).click();
 
         $(withText(dateToInput)).
                 shouldBe(visible, Duration.ofSeconds(15));

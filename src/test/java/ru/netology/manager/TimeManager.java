@@ -17,14 +17,7 @@ DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 
     public void calendarSelector(LocalDate date) {
-        int currentMonth = LocalDate.now().getMonthValue();
-        int month = date.getMonthValue();
 
-        if (!Objects.equals(month, currentMonth)) {
-            $("[data-step='1']").click();
-        }
-        String theRightDay = String.valueOf(date.getDayOfMonth());
-        $$("[role=gridcell]").find(exactText(theRightDay)).click();
     }
 
     public void endOfInsert() {
